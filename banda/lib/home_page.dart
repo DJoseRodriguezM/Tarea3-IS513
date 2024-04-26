@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:banda/componentes/votar_page.dart';
+import 'package:banda/componentes/registrar_page.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -22,6 +25,8 @@ class _HomePageState extends State<HomePage> {
             setState(() {});
           },
           children: const [
+            VotarPage(),
+            RegistrarPage(),
           ]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.currentIndex,
@@ -47,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         ],
         selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
-        backgroundColor: Color.fromARGB(255, 30, 30, 30)
+        backgroundColor: const Color.fromARGB(255, 30, 30, 30),
       ),
     );
   }
