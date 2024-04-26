@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "941195896387",
+    "project_id": "banda-de-rock",
+    "storage_bucket": "banda-de-rock.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941195896387:android:acfbc900cc6035292596f6",
+        "android_client_info": {
+          "package_name": "com.example.banda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm88ZNVg8Go61EE_UOI9v-siWmnd71VzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941195896387:android:e3298f9c66ea1b7b2596f6",
+        "android_client_info": {
+          "package_name": "hn.edu.unah.banda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm88ZNVg8Go61EE_UOI9v-siWmnd71VzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
