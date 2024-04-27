@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VotarPage extends StatelessWidget {
-  const VotarPage({super.key});
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  VotarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +13,14 @@ class VotarPage extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromARGB(255, 30, 30, 30),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           children: [
             
           ],
         ),
       ),
+      
     );
   }
 }

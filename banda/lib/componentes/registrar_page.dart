@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegistrarPage extends StatelessWidget {
-  const RegistrarPage({super.key});
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  RegistrarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,7 @@ class RegistrarPage extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromARGB(255, 30, 30, 30),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           children: [
             

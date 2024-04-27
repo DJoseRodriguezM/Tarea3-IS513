@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:banda/home_page.dart';
 import 'package:banda/routes.dart';
-import 'package:banda/componentes/registrar_page.dart';
-import 'package:banda/componentes/votar_page.dart';
 
 
 final Map<String, Widget Function(BuildContext)> routes = {

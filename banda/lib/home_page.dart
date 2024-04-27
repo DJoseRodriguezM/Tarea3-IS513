@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
             widget.currentIndex = value;
             setState(() {});
           },
-          children: const [
+          children:  [
             VotarPage(),
             RegistrarPage(),
           ]),
