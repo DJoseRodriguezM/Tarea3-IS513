@@ -37,7 +37,8 @@ class VotarPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                ListView.builder(
+                Expanded(
+                  child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: bandasRock.length,
                     itemBuilder: (context, index) {
@@ -89,15 +90,15 @@ class VotarPage extends StatelessWidget {
                                 if (!snapshot.exists) {
                                   throw Exception("El documento no existe!");
                                 } else {
-                                  // Incrementa el número de votos
-                                  int nuevoVoto = snapshot.get('votos') + 1;
+                                  int nVotos = snapshot.get('votos') + 1;
                                   transaction
-                                      .update(docRef, {'votos': nuevoVoto});
+                                      .update(docRef, {'votos': nVotos});
                                 }
                               });
                             }),
                       );
                     }),
+                ),
               ],
             );
           } else {
