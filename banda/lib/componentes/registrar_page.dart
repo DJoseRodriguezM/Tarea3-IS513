@@ -190,7 +190,7 @@ class RegistrarPage extends StatelessWidget {
                         backgroundColor: const Color.fromARGB(255, 30, 30, 30),
                       ),
                       child: const Text(
-                        'Login',
+                        'Agregar Banda',
                         style: TextStyle(
                           fontSize: 18,
                           color: Color.fromARGB(255, 210, 210, 210),

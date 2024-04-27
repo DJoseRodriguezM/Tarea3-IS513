@@ -3,9 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:banda/routes.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class RegistrarPage extends StatelessWidget {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final storage = FirebaseStorage.instance.ref();
 
   RegistrarPage({super.key});
 
@@ -16,6 +18,9 @@ class RegistrarPage extends StatelessWidget {
     final anioLanzamientoController = TextEditingController();
     final votosController = TextEditingController();
     final formKey = GlobalKey<FormState>();
+
+    String? imgUrl;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 49, 47, 47),
       appBar: AppBar(
@@ -158,24 +163,21 @@ class RegistrarPage extends StatelessWidget {
                     const SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          final data = {
-                            'nombreBanda': nombreBandaController.text,
-                            'nombreAlbum': nombreAlbumController.text,
-                            'anioLanza': int.parse(anioLanzamientoController.text),
-                            'votos': int.parse(votosController.text),
-                          };
+                        final ImagePicker picker = ImagePicker();
+                        XFile? image =
+                            await picker.pickImage(source: ImageSource.gallery);
+
+                        if (image != null) {
+                          Reference imagenRef = storage.child(
+                              'images/${DateTime.now().millisecondsSinceEpoch}.jpg');
 
                           try {
-                            final instance = FirebaseFirestore.instance;
-                            final resp =
-                                await instance.collection('bandas').add(data);
-                            print('ID Banda: ${resp.id}');
+                            await imagenRef.putFile(File(image.path));
+                            imgUrl = await imagenRef.getDownloadURL();
+                            print('Imagen subida exitosamente: $imgUrl');
                           } catch (e) {
-                            print('Fallo al agregar: $e');
+                            print('Error al subir la imagen: $e');
                           }
-                          Navigator.pushReplacementNamed(
-                    context, MyRoutes.home.name);
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -191,7 +193,53 @@ class RegistrarPage extends StatelessWidget {
                         backgroundColor: const Color.fromARGB(255, 30, 30, 30),
                       ),
                       child: const Text(
-                        'Login',
+                        'Foto del Album (Opcional)',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 210, 210, 210),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 35.0),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+
+                          final data = {
+                            'nombreBanda': nombreBandaController.text,
+                            'nombreAlbum': nombreAlbumController.text,
+                            'anioLanza':
+                                int.parse(anioLanzamientoController.text),
+                            'votos': int.parse(votosController.text),
+                            'imgUrl': imgUrl ?? '', //si imgUrl es null, se asigna un string vacío
+                          };
+
+                          try {
+                            final instance = FirebaseFirestore.instance;
+                            final resp =
+                                await instance.collection('bandaimg').add(data);
+                            print('ID Banda: ${resp.id}');
+                          } catch (e) {
+                            print('Fallo al agregar: $e');
+                          }
+                          Navigator.pushReplacementNamed(
+                              context, MyRoutes.home.name);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15,
+                          horizontal: 50,
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 30, 30, 30),
+                      ),
+                      child: const Text(
+                        'Agregar Banda',
                         style: TextStyle(
                           fontSize: 18,
                           color: Color.fromARGB(255, 210, 210, 210),
