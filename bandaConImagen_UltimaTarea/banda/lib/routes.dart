@@ -1,0 +1,3 @@
+enum MyRoutes {
+  home,
+}
